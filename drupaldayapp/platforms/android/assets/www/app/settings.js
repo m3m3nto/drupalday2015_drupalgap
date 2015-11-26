@@ -106,7 +106,7 @@ drupalgap.settings.mode = 'phonegap';
 
 // Language Files - locale/[language-code].json
 drupalgap.settings.locale = {
-   /* es: { } */
+  it: { } 
 };
 
 /*************|
@@ -156,7 +156,7 @@ drupalgap.settings.loader = {
 
 /** Contributed Modules - www/app/modules **/
 
-//Drupal.modules.contrib['example'] = {};
+Drupal.modules.custom['drupalday'] = {};
 
 /** Custom Modules - www/app/modules/custom **/
 

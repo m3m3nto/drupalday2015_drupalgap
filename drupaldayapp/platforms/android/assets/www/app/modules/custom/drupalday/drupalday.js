@@ -48,11 +48,11 @@ function drupalday_dashboard_page() {
     };
     content.support = {
       theme: 'button_link',
-      text: t('Support'),
+      text: t('Sito ufficiale DrupalGap'),
       path: 'http://www.drupalgap.org/support',
       options: {InAppBrowser: true}
     };
     return content;
   }
-  catch (error) { console.log('system_dashboard_page - ' + error); }
+  catch (error) { console.log('sdrupalday_dashboard_page - ' + error); }
 }

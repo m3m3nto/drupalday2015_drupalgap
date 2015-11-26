@@ -1,22 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.drupalday" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
-    <allow-intent href="market:*" />
-    <name>DrupalDay App</name>
-    <description>
-        Una DrupalGap demo per il DrupalDay 2015.
-    </description>
-    <author email="m3m3nto@gmail.com" href="http://m3m3nto.com">
-        M3m3nto
-    </author>
-    <content src="index.html" />
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
@@ -40,4 +24,20 @@
     <feature name="Camera">
         <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     </feature>
+    <allow-intent href="market:*" />
+    <name>DrupalDay App</name>
+    <description>
+        Una DrupalGap demo per il DrupalDay 2015.
+    </description>
+    <author email="m3m3nto@gmail.com" href="http://m3m3nto.com">
+        M3m3nto
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
 </widget>
