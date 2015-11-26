@@ -25,10 +25,17 @@ DrupalGap Enviroment setup for a generic Debian platform
 
 - Choose android packages accordingly with Android documentation
 
-- Create 
+- Create phonegap/cordova application
 # cordova create drupalgapapp com.drupalgapapp "DrupalGap App"
+# cd drupalgapapp
 # cordova platform add android
 # cordova build
+
+- Add cordova plugins
+
+# cordova plugin add org.apache.cordova.console org.apache.cordova.device org.apache.cordova.dialogs org.apache.cordova.file org.apache.cordova.inappbrowser org.apache.cordova.network-information
+
+# cordova plugin add org.apache.cordova.camera org.apache.cordova.geolocation
 
 - Drupal and drupal gap install
 # drush dl drupal
@@ -47,8 +54,8 @@ DrupalGap Enviroment setup for a generic Debian platform
 - Start drupal setup: http://drupalgap.dev
 
 - Install DrupalGap dependencies
-# drush dl admin_menu services libraries views_datasource
-# drush en drupalgap admin_menu field_ui image list menu number path
+# drush dl drupalgap admin_menu services libraries views_datasource
+# drush en drupalgap admin_menu field_ui image list menu number path services views_datasource
 
 - Complete installation: http://drupalgap.org/node/193
 
