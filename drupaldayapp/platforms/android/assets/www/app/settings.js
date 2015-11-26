@@ -156,11 +156,8 @@ drupalgap.settings.loader = {
 
 /** Contributed Modules - www/app/modules **/
 
-Drupal.modules.custom['drupalday'] = {};
-
 /** Custom Modules - www/app/modules/custom **/
-
-//Drupal.modules.custom['my_module'] = {};
+Drupal.modules.custom['drupalday'] = {};
 
 /***************************************|
  * Menus - http://drupalgap.org/node/85 |

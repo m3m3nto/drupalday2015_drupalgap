@@ -43,7 +43,7 @@ function drupalday_dashboard_page() {
     content.get_started = {
       theme: 'button_link',
       text: t('Guida dev environment'),
-      path: 'https://github.com/m3m3nto/drupalgap_enviroment_installation',
+      path: 'https://github.com/m3m3nto/drupalday2015_drupalgap',
       options: {InAppBrowser: true}
     };
     content.support = {
@@ -54,5 +54,5 @@ function drupalday_dashboard_page() {
     };
     return content;
   }
-  catch (error) { console.log('sdrupalday_dashboard_page - ' + error); }
+  catch (error) { console.log('drupalday_dashboard_page - ' + error); }
 }
