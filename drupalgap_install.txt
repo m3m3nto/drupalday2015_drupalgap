@@ -1,0 +1,51 @@
+DrupalGap Enviroment Setup Script
+
+- java 6 install
+# sudo dpkg --add-architecture i386
+# sudo apt-get update
+# sudo apt-get install libncurses5:i386 libstdc++6:i386 zlib1g:i386
+# sudo add-apt-repository ppa:webupd8team/java
+# sudo apt-get update
+# sudo apt-get install oracle-java6-installer
+# sudo update-alternatives --config java
+
+- install nodejs
+# curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+# sudo npm install -g cordova
+
+- android platform guide: 
+- http://docs.phonegap.com/en/edge/guide_platforms_android_index.md.html#Android%20Platform%20Guide
+# wget -c http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+# tar xzf android-sdk_r24.4.1-linux.tgz
+# mv tar xzf android-sdk-linux /home/lorenzo/Apps/    
+# echo "export PATH=${PATH}:/home/lorenzo/Apps/android-sdk-linux/platform-tools:/home/lorenzo/Apps/android-sdk-linux/tools" >> ~/.bashrc
+# cd /home/lorenzo/Apps/android-sdk-linux/tools
+# android sdk
+
+- choose android packages 
+
+# cd /htdocs
+# cordova create drupalgapapp com.drupalgapapp "DrupalGap App"
+# cordova platform add android
+# cordova build
+
+- drupal and drupal gap install
+# drush dl drupal
+# mv drupal-7.41 drupalgap
+# cd drupalgap/sites/default
+# mkdir files
+# chmod 777 files
+# cp default.settings.php settings.php
+# chmod 777 settings.php
+
+- add drupalgap.dev virtual host for your enviroment apache2/nginx
+
+# sudo echo "127.0.0.1  drupalgap.dev" >> /etc/hosts
+
+- start drupal setup: http://drupalgap.dev
+
+# drush dl admin_menu services libraries views_datasource
+# drush en drupalgap admin_menu field_ui image list menu number path
+
+- complete installation: http://drupalgap.org/node/193
+
