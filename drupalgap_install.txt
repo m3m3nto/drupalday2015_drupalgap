@@ -32,9 +32,7 @@ DrupalGap Enviroment setup for a generic Debian platform
 # cordova build
 
 - Add cordova plugins
-
 # cordova plugin add org.apache.cordova.console org.apache.cordova.device org.apache.cordova.dialogs org.apache.cordova.file org.apache.cordova.inappbrowser org.apache.cordova.network-information
-
 # cordova plugin add org.apache.cordova.camera org.apache.cordova.geolocation
 
 - Drupal and drupal gap install
