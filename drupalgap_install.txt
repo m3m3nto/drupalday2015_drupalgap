@@ -1,6 +1,7 @@
-DrupalGap Enviroment Setup Script
+DrupalGap Enviroment setup for a generic Debian platform
 
-- java 6 install
+- Java 6 installation
+
 # sudo dpkg --add-architecture i386
 # sudo apt-get update
 # sudo apt-get install libncurses5:i386 libstdc++6:i386 zlib1g:i386
@@ -9,27 +10,27 @@ DrupalGap Enviroment Setup Script
 # sudo apt-get install oracle-java6-installer
 # sudo update-alternatives --config java
 
-- install nodejs
+- Nodejs installation
 # curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
 # sudo npm install -g cordova
 
-- android platform guide: 
-- http://docs.phonegap.com/en/edge/guide_platforms_android_index.md.html#Android%20Platform%20Guide
+- Follow the Phonegap android platform guide to install Android: 
+  http://docs.phonegap.com/en/edge/guide_platforms_android_index.md.html#Android%20Platform%20Guide
 # wget -c http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
 # tar xzf android-sdk_r24.4.1-linux.tgz
-# mv tar xzf android-sdk-linux /home/lorenzo/Apps/    
-# echo "export PATH=${PATH}:/home/lorenzo/Apps/android-sdk-linux/platform-tools:/home/lorenzo/Apps/android-sdk-linux/tools" >> ~/.bashrc
-# cd /home/lorenzo/Apps/android-sdk-linux/tools
+# mv tar xzf android-sdk-linux ~/    
+# echo "export PATH=${PATH}:~/android-sdk-linux/platform-tools:~/android-sdk-linux/tools" >> ~/.bashrc
+# cd ~/android-sdk-linux/tools
 # android sdk
 
-- choose android packages 
+- Choose android packages accordingly with Android documentation
 
-# cd /htdocs
+- Create 
 # cordova create drupalgapapp com.drupalgapapp "DrupalGap App"
 # cordova platform add android
 # cordova build
 
-- drupal and drupal gap install
+- Drupal and drupal gap install
 # drush dl drupal
 # mv drupal-7.41 drupalgap
 # cd drupalgap/sites/default
@@ -38,14 +39,16 @@ DrupalGap Enviroment Setup Script
 # cp default.settings.php settings.php
 # chmod 777 settings.php
 
-- add drupalgap.dev virtual host for your enviroment apache2/nginx
+- Add drupalgap.dev virtual host for your enviroment apache2/nginx
 
+- Modify your /etc/hosts 
 # sudo echo "127.0.0.1  drupalgap.dev" >> /etc/hosts
 
-- start drupal setup: http://drupalgap.dev
+- Start drupal setup: http://drupalgap.dev
 
+- Install DrupalGap dependencies
 # drush dl admin_menu services libraries views_datasource
 # drush en drupalgap admin_menu field_ui image list menu number path
 
-- complete installation: http://drupalgap.org/node/193
+- Complete installation: http://drupalgap.org/node/193
 
