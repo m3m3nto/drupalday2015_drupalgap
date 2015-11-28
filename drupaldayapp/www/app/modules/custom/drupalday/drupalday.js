@@ -98,11 +98,6 @@ function drupalday_dashboard_page() {
         t('DrupalGap: crea una app Android (ed iOS) con Drupal , Drupalgap ed Apache Cordova') +
       '</p>'
     };
-    content.site_info = {
-      markup: '<h4 style="text-align: center;">' +
-        Drupal.settings.site_path +
-      '</h4>'
-    };
     if (drupalgap.settings.logo) {
       content.logo = {
         markup: '<center>' +
@@ -120,6 +115,11 @@ function drupalday_dashboard_page() {
       theme: 'button_link',
       text: t('Drupal Day Gallery'),
       path: 'gallery'
+    };
+    content.foto = {
+      theme: 'button_link',
+      text: t('Nuova Foto'),
+      path: 'node/add/foto'
     };
     return content;
   }

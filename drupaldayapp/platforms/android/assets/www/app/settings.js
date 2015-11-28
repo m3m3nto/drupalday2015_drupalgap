@@ -58,7 +58,7 @@ drupalgap.settings.locale = {
  *************/
 
 // App Title
-drupalgap.settings.title = 'DrupalGap';
+drupalgap.settings.title = 'DrupalDay 2015 - DrupalGap';
  
 // App Front Page
 drupalgap.settings.front = 'drupaldaydashboard';
