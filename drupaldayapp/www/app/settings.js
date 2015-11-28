@@ -25,7 +25,7 @@ Drupal.settings.file_public_path = 'sites/default/files';
 //Drupal.settings.file_private_path = 'system/files';
 
 // The Default Language Code
-Drupal.settings.language_default = 'it';
+Drupal.settings.language_default = 'und';
 
 /* Drupal Caching */
 
@@ -50,7 +50,7 @@ drupalgap.settings.mode = 'phonegap';
 
 // Language Files - locale/[language-code].json
 drupalgap.settings.locale = {
-  it: { }
+  /* it: { } */
 };
 
 /*************|
@@ -58,7 +58,7 @@ drupalgap.settings.locale = {
  *************/
 
 // App Title
-drupalgap.settings.title = 'DrupalGap';
+drupalgap.settings.title = 'DrupalDay 2015 - DrupalGap';
  
 // App Front Page
 drupalgap.settings.front = 'drupaldaydashboard';
