@@ -52,7 +52,7 @@ DrupalGap Enviroment setup for a generic Debian platform
 - Start drupal setup: http://drupalgap.dev
 
 - Install DrupalGap dependencies
-# drush dl drupalgap admin_menu services libraries views_datasource
+# drush dl drupalgap admin_menu services libraries views_datasource views
 # drush en drupalgap admin_menu field_ui image list menu number path services views_datasource
 
 - Complete installation: http://drupalgap.org/node/193

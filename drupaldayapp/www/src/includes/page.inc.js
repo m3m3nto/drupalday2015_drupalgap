@@ -125,17 +125,16 @@ $(document).on('pagebeforechange', function(e, data) {
  */
 function template_preprocess_page(variables) {
   try {
-    // Set up default attributes for the page's div container.
+    // Set up default attribute's for the page's div container.
     if (typeof variables.attributes === 'undefined') {
       variables.attributes = {};
     }
 
     // @todo - is this needed?
-    // @UPDATE - this should be used, but these page attributes are ignored
-    // by drupalgap_add_page_to_dom()!
     variables.attributes['data-role'] = 'page';
 
-    module_invoke_all('preprocess_page', variables);
+    // Call all hook_preprocess_page functions.
+    module_invoke_all('preprocess_page');
 
     // Place the variables into drupalgap.page
     drupalgap.page.variables = variables;
@@ -156,8 +155,7 @@ function template_process_page(variables) {
     // For each region, render it, then replace the placeholder in the page's
     // html with the rendered region.
     var page_id = drupalgap_get_page_id(drupalgap_path);
-    var page = $('#' + page_id);
-    var page_html = $(page).html();
+    var page_html = $('#' + page_id).html();
     if (!page_html) { return; }
     for (var index in drupalgap.theme.regions) {
         if (!drupalgap.theme.regions.hasOwnProperty(index)) { continue; }
@@ -169,8 +167,7 @@ function template_process_page(variables) {
           drupalgap_render_region(_region)
         );
     }
-    $(page).html(page_html);
-    module_invoke_all('post_process_page', variables);
+    $('#' + page_id).html(page_html);
   }
   catch (error) { console.log('template_process_page - ' + error); }
 }
@@ -249,8 +246,6 @@ function drupalgap_remove_page_from_dom(page_id) {
         typeof _dg_GET[page_id] !== 'undefined' &&
         (typeof options.leaveQuery === 'undefined' || !options.leaveQuery)
       ) { delete _dg_GET[page_id]; }
-      // Remove any embedded view for the page.
-      views_embedded_view_delete(page_id);
     }
     else {
       console.log('WARNING: drupalgap_remove_page_from_dom() - not removing ' +
@@ -361,9 +356,6 @@ function drupalgap_jqm_active_page_url() {
  */
 function drupalgap_render_page() {
   try {
-
-    module_invoke_all('page_build', drupalgap.output);
-
     // Since the page output has already been assembled, render the content
     // based on the output type. The output type will either be an html string
     // or a drupalgap render object.

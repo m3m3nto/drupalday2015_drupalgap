@@ -1,0 +1,13 @@
+/**
+ * Custom gallery display
+ */
+#drupalday_gallery_page img{
+  padding: 10px;  
+}
+
+/**
+ * Overridings
+ */
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+  background-color: #fff;
+}

@@ -390,48 +390,6 @@ function hook_node_page_view_alter_TYPE(node, options) {
 }
 
 /**
- * Implements hook_page_build().
- * @param {Object} output The page build output object.
- */
-function hook_page_build(output) {
-  try {
-    // Remove all titles from article node pages.
-    if (output.node && output.node.type == 'article') {
-      delete output.title;
-    }
-  }
-  catch (error) { console.log('hook_page_build - ' + error); }
-}
-
-/**
- * Implements hook_preprocess_page().
- * Take action before the page is processed and shown to the user.
- * @param {Object} variables The page variables.
- */
-function hook_preprocess_page(variables) {
-  try {
-
-  }
-  catch (error) {
-    console.log('hook_preprocess_page - ' + error);
-  }
-}
-
-/**
- * Implements hook_post_process_page().
- * Take action after the page is processed and shown to the user.
- * @param {Object} variables The page variables.
- */
-function hook_post_process_page(variables) {
-  try {
-
-  }
-  catch (error) {
-    console.log('hook_post_process_page - ' + error);
-  }
-}
-
-/**
  * Implements hook_views_exposed_filter().
  * @param {Object} form
  * @param {Object} form_state

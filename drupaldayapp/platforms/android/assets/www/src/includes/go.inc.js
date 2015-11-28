@@ -102,7 +102,7 @@ function drupalgap_goto(path) {
 
     // Return if we are trying to go to the path we are already on, unless this
     // was a form submission, then we'll let the page rebuild itself. For
-    // accuracy we compare the jQM active page url with the destination page
+    // accurracy we compare the jQM active page url with the destination page
     // id.
     // @todo - this boolean doesn't match the comment description of the code
     // block, i.e. the form_submission check is opposite of what it says
@@ -348,8 +348,7 @@ function _drupalgap_goto_prepare_path(path) {
  */
 function drupalgap_back() {
   try {
-    var active_page_id = $('.ui-page-active').attr('id');
-    if (active_page_id == drupalgap.settings.front) {
+    if ($('.ui-page-active').attr('id') == drupalgap.settings.front) {
       var msg = t('Exit') + ' ' + drupalgap.settings.title + '?';
       if (drupalgap.settings.exit_message) {
         msg = drupalgap.settings.exit_message;
@@ -358,7 +357,6 @@ function drupalgap_back() {
           confirmCallback: _drupalgap_back_exit
       });
     }
-    else if (active_page_id == '_drupalgap_splash') { return; }
     else { _drupalgap_back(); }
   }
   catch (error) { console.log('drupalgap_back' + error); }

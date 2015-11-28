@@ -122,9 +122,4 @@ div[data-role="header"] div[data-role="controlgroup"] .ui-controlgroup-controls 
     }
 }
 
-/**
- * Overridings
- */
-.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
-  background-color: #fff;
-}
+

@@ -240,7 +240,7 @@ function _drupalgap_deviceready_options() {
       error: function(jqXHR, textStatus, errorThrown) {
         // Build an informative error message and display it.
         var msg = t('Failed connection to') + ' ' +
-          Drupal.settings.site_path;
+          drupalgap.settings.site_path;
         if (errorThrown != '') { msg += ' - ' + errorThrown; }
         msg += ' - ' + t('Check your device\'s connection and check that') +
           ' ' + Drupal.settings.site_path + ' ' + t('is online.');
@@ -590,9 +590,8 @@ function drupalgap_toast(html) {
             textVisible: true,
             html: html
         });
-        var interval = setInterval(function () {
-            $.mobile.loading('hide');
-            clearInterval(interval);
+        setTimeout(function() {
+            $.mobile.loading().hide();
         }, close);
     }, open);
   }
@@ -1273,7 +1272,7 @@ function drupalgap_menu_access(path) {
 }
 
 /**
- * @deprecated Use module_load() instead.
+ * @deprecated Use drupal_module_load() instead.
  * @param {String} name
  * @return {Object}
  */
@@ -1387,16 +1386,6 @@ function drupalgap_remove_page_from_dom(page_id) {
     $('#' + page_id).empty().remove();
   }
   catch (error) { console.log('drupalgap_remove_page_from_dom - ' + error); }
-}
-
-/**
- * Restart the app.
- */
-function drupalgap_restart() {
-  try {
-    location.reload();
-  }
-  catch (error) { console.log('drupalgap_restart - ' + error); }
 }
 
 /**

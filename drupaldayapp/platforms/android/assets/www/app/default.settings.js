@@ -11,8 +11,8 @@ Drupal.settings.debug = true;
 /****************************************|
  * Drupal Settings (provided by jDrupal) |
  ****************************************/
-
-/* DRUPAL PATHS */
+ 
+/* Drupal Paths */
  
 // Site Path (do not use a trailing slash)
 Drupal.settings.site_path = ''; // e.g. http://www.example.com
@@ -27,73 +27,16 @@ Drupal.settings.file_public_path = 'sites/default/files';
 // The Default Language Code
 Drupal.settings.language_default = 'und';
 
-/* CACHING AND PERFORMANCE */
+/* Drupal Caching */
 
-// Entity Caching
-Drupal.settings.cache.entity = {
+// Set to true to enable local storage caching.
+Drupal.settings.cache.entity.enabled = false;
+Drupal.settings.cache.views.enabled = false;
 
-  /* Globals (will be used if not overwritten below) */
-  enabled: true,
-  expiration: 60, // # of seconds to cache, set to 0 to cache forever
-
-  /* Entity types */
-  entity_types: {
-
-    /* Comments */
-    /*comment: {
-     bundles: {}
-     },*/
-
-    /* Files */
-    /*file: {
-     bundles: {}
-     },*/
-
-    /* Nodes */
-    node: {
-
-      /* Node Globals (will be used if not overwritten below) */
-      enabled: true,
-      expiration: 120,
-
-      /* Content types (aka bundles) */
-      bundles: {
-
-        articles: {
-          expiration: 3600
-        },
-        page: {
-          enabled: false
-        }
-
-      }
-    },
-
-    /* Terms */
-    /*taxonomy_term: {
-     bundles: {}
-     },*/
-
-    /* Vocabularies */
-    /*taxonomy_vocabulary: {
-     bundles: {}
-     },*/
-
-    /* Users */
-    /*user: {
-     bundles: {}
-     }*/
-
-  }
-
-};
-
-/* Views Caching */
-
-Drupal.settings.cache.views = {
-  enabled: true,
-  expiration: 3600
-};
+// Number of seconds before cached copy expires. Set to 0 to cache forever, set
+// to 60 for one minute, etc.
+Drupal.settings.cache.entity.expiration = 3600;
+Drupal.settings.cache.views.expiration = 3600;
 
 /*********************|
  * DrupalGap Settings |
@@ -176,8 +119,7 @@ drupalgap.settings.menus['user_menu_anonymous'] = {
       path: 'user/login',
       options: {
         attributes: {
-          'data-icon': 'lock',
-          'class': 'ui-btn ui-btn-icon-right'
+          'data-icon': 'lock'
         }
       }
     },
@@ -202,8 +144,7 @@ drupalgap.settings.menus['user_menu_authenticated'] = {
       path: 'user',
       options: {
         attributes: {
-          'data-icon': 'user',
-          'class': 'ui-btn ui-btn-icon-right'
+          'data-icon': 'user'
         }
       }
     },
@@ -227,9 +168,8 @@ drupalgap.settings.menus['main_menu'] = {
       title:'Content',
       path:'node',
       options:{
-        attributes: {
-          'data-icon': 'star',
-          'class': 'ui-btn ui-btn-icon-right'
+        attributes:{
+          'data-icon':'star'
         }
       }
     },

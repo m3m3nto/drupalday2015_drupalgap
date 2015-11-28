@@ -1,16 +1,86 @@
+var _drupalday_reload_page = null;
+var _drupalday_reload_messages = null;
+
 /**
  * Implements hook_menu().
  */
 function drupalday_menu() {
   try {
     var items = {};
-    items['drupalday-dashboard'] = {
+    items['drupaldaydashboard'] = {
       title: 'Drupalday 2015',
       page_callback: 'drupalday_dashboard_page'
     };
+    items['gallery'] = {
+    title: 'DrupalDay 2015 Gallery',
+    page_callback: 'drupalday_gallery_page'
+  };
+  return items;
+    items['_reload'] = {
+      title: t('Reloading') + '...',
+      page_callback: 'drupalday_reload_page',
+      pageshow: 'drupalday_reload_pageshow'
+    };
     return items;
   }
-  catch (error) { console.log('my_module_menu - ' + error); }
+  catch (error) { console.log('drupalday_menu - ' + error); }
+}
+
+/**
+ * The page callback for the reload page.
+ * @return {String}
+ */
+function drupalday_reload_page() {
+  try {
+    // Set aside any messages, then return an empty page.
+    var messages = drupalgap_get_messages();
+    if (!empty(messages)) {
+      _system_reload_messages = messages.slice();
+      _drupalday_reload_messages([]);
+    }
+    return '';
+  }
+  catch (error) { console.log('drypalday_reload_page - ' + error); }
+}
+
+/**
+ * The pageshow callback for the reload page.
+ */
+function drupalday_reload_pageshow() {
+  try {
+    // Set any messages that were set aside.
+    if (_drupalday_reload_messages && !empty(_drupalday_reload_messages)) {
+      for (var i = 0; i < _drupalday_reload_messages.length; i++) {
+        drupalgap_set_message(
+          _drupalday_reload_messages[i].message,
+          _drupalday_reload_messages[i].type
+        );
+      }
+      _drupalday_reload_messages = null;
+    }
+    drupalgap_loading_message_show();
+  }
+  catch (error) { console.log('drupalday_reload_pageshow - ' + error); }
+}
+
+/**
+ * Implements hook_system_drupalgap_goto_post_process().
+ * @param {String} path
+ */
+function drupalday_drupalgap_goto_post_process(path) {
+  try {
+    if (path == '_reload') {
+      if (!_drupalday_reload_page) { return; }
+      var path = '' + _drupalday_reload_page;
+      _drupalday_reload_page = null;
+      drupalgap_loading_message_show();
+      drupalgap_goto(path, { reloadPage: true });
+    }
+
+  }
+  catch (error) {
+    console.log('drupalday_drupalgap_goto_post_process - ' + error);
+  }
 }
 
 /**
@@ -20,18 +90,18 @@ function drupalday_menu() {
 function drupalday_dashboard_page() {
   try {
     var content = {};
-    content.site_info = {
-      markup: '<h4 style="text-align: center;">' +
-        Drupal.settings.site_path +
-      '</h4>'
-    };
-    content.welcome = {
+    content.welcome_drupalday = {
       markup: '<h2 style="text-align: center;">' +
         t('Benvenuto al DrupalDay') +
       '</h2>' +
       '<p style="text-align: center;">' +
         t('DrupalGap: crea una app Android (ed iOS) con Drupal , Drupalgap ed Apache Cordova') +
       '</p>'
+    };
+    content.site_info = {
+      markup: '<h4 style="text-align: center;">' +
+        Drupal.settings.site_path +
+      '</h4>'
     };
     if (drupalgap.settings.logo) {
       content.logo = {
@@ -40,19 +110,61 @@ function drupalday_dashboard_page() {
                '</center>'
       };
     }
-    content.get_started = {
+    content.get_started_drupalday = {
       theme: 'button_link',
       text: t('Guida dev environment'),
       path: 'https://github.com/m3m3nto/drupalday2015_drupalgap',
       options: {InAppBrowser: true}
     };
-    content.support = {
+    content.gallery = {
       theme: 'button_link',
-      text: t('Sito ufficiale DrupalGap'),
-      path: 'http://www.drupalgap.org/support',
-      options: {InAppBrowser: true}
+      text: t('Drupal Day Gallery'),
+      path: 'gallery'
     };
     return content;
   }
   catch (error) { console.log('drupalday_dashboard_page - ' + error); }
+}
+
+/**
+ * The page callback to display the DrupalDay gallery view.
+ */
+function drupalday_gallery_page() {
+  try {
+    var content = {};
+    content['gallery_page'] = {
+      theme: 'view',
+      format: 'unformatted_list',
+      path: 'drupalgap/views_datasource/gallery', /* the path to the view in Drupal */
+      row_callback: 'drupalday_gallery_list_row',
+      empty_callback: 'drupalday_gallery_list_empty',
+      attributes: {
+        id: 'drupalday_gallery_page'
+      }
+    };
+    return content;
+  }
+  catch (error) { console.log('drupalday_gallery_page - ' + error); }
+}
+
+/**
+ * The row callback to render a single row.
+ */
+function drupalday_gallery_list_row(view, row) {
+  try {
+      var image_html = theme('image', { path: row.field_foto.src });
+      return l(image_html, 'node/' + row.nid);
+  }
+  catch (error) { console.log('drupalday_gallery_list_row - ' + error); }
+}
+ 
+ 
+/**
+ * Callback function for no results.
+ */
+function drupalday_gallery_list_empty(view) {
+  try {
+    return '<p>Spiacenti nessuna foto trovata</p>';
+  }
+  catch (error) { console.log('drupalday_gallery_list_empty - ' + error); }
 }

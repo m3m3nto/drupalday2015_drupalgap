@@ -3,7 +3,7 @@
  **************/
 
 // Uncomment to clear the app's local storage cache each time the app loads.
-//window.localStorage.clear();
+window.localStorage.clear();
 
 // Set to true to see console.log() messages. Set to false when publishing app.
 Drupal.settings.debug = true;
@@ -11,8 +11,8 @@ Drupal.settings.debug = true;
 /****************************************|
  * Drupal Settings (provided by jDrupal) |
  ****************************************/
-
-/* DRUPAL PATHS */
+ 
+/* Drupal Paths */
  
 // Site Path (do not use a trailing slash)
 Drupal.settings.site_path = 'http://drupalday.dev'; // e.g. http://www.example.com
@@ -27,73 +27,16 @@ Drupal.settings.file_public_path = 'sites/default/files';
 // The Default Language Code
 Drupal.settings.language_default = 'it';
 
-/* CACHING AND PERFORMANCE */
+/* Drupal Caching */
 
-// Entity Caching
-Drupal.settings.cache.entity = {
+// Set to true to enable local storage caching.
+Drupal.settings.cache.entity.enabled = false;
+Drupal.settings.cache.views.enabled = false;
 
-  /* Globals (will be used if not overwritten below) */
-  enabled: true,
-  expiration: 60, // # of seconds to cache, set to 0 to cache forever
-
-  /* Entity types */
-  entity_types: {
-
-    /* Comments */
-    /*comment: {
-     bundles: {}
-     },*/
-
-    /* Files */
-    /*file: {
-     bundles: {}
-     },*/
-
-    /* Nodes */
-    node: {
-
-      /* Node Globals (will be used if not overwritten below) */
-      enabled: true,
-      expiration: 120,
-
-      /* Content types (aka bundles) */
-      bundles: {
-
-        articles: {
-          expiration: 3600
-        },
-        page: {
-          enabled: false
-        }
-
-      }
-    },
-
-    /* Terms */
-    /*taxonomy_term: {
-     bundles: {}
-     },*/
-
-    /* Vocabularies */
-    /*taxonomy_vocabulary: {
-     bundles: {}
-     },*/
-
-    /* Users */
-    /*user: {
-     bundles: {}
-     }*/
-
-  }
-
-};
-
-/* Views Caching */
-
-Drupal.settings.cache.views = {
-  enabled: true,
-  expiration: 3600
-};
+// Number of seconds before cached copy expires. Set to 0 to cache forever, set
+// to 60 for one minute, etc.
+Drupal.settings.cache.entity.expiration = 3600;
+Drupal.settings.cache.views.expiration = 3600;
 
 /*********************|
  * DrupalGap Settings |
@@ -102,11 +45,12 @@ Drupal.settings.cache.views = {
 // DrupalGap Mode (defaults to 'web-app')
 //  'web-app' - use this mode to build a web application for a browser window
 //  'phonegap' - use this mode to build a mobile application with phonegap
+//drupalgap.settings.mode = 'web-app';
 drupalgap.settings.mode = 'phonegap';
 
 // Language Files - locale/[language-code].json
 drupalgap.settings.locale = {
-  it: { } 
+  it: { }
 };
 
 /*************|
@@ -117,13 +61,13 @@ drupalgap.settings.locale = {
 drupalgap.settings.title = 'DrupalGap';
  
 // App Front Page
-drupalgap.settings.front = 'drupalday-dashboard';
+drupalgap.settings.front = 'drupaldaydashboard';
 
 // Theme
-drupalgap.settings.theme = 'easystreet3';
+drupalgap.settings.theme = 'drupalday';
 
 // Logo
-drupalgap.settings.logo = 'themes/easystreet3/images/drupalday.jpg';
+drupalgap.settings.logo = 'app/themes/drupalday/images/drupalday.jpg';
 
 // Offline Warning Message. Set to false to hide message.
 drupalgap.settings.offline_message = 'No connection found!';
@@ -156,7 +100,10 @@ drupalgap.settings.loader = {
 
 /** Contributed Modules - www/app/modules **/
 
+//Drupal.modules.contrib['example'] = {};
+
 /** Custom Modules - www/app/modules/custom **/
+
 Drupal.modules.custom['drupalday'] = {};
 
 /***************************************|
@@ -173,8 +120,7 @@ drupalgap.settings.menus['user_menu_anonymous'] = {
       path: 'user/login',
       options: {
         attributes: {
-          'data-icon': 'lock',
-          'class': 'ui-btn ui-btn-icon-right'
+          'data-icon': 'lock'
         }
       }
     },
@@ -199,8 +145,7 @@ drupalgap.settings.menus['user_menu_authenticated'] = {
       path: 'user',
       options: {
         attributes: {
-          'data-icon': 'user',
-          'class': 'ui-btn ui-btn-icon-right'
+          'data-icon': 'user'
         }
       }
     },
@@ -224,18 +169,8 @@ drupalgap.settings.menus['main_menu'] = {
       title:'Content',
       path:'node',
       options:{
-        attributes: {
-          'data-icon': 'star',
-          'class': 'ui-btn ui-btn-icon-right'
-        }
-      }
-    },
-    {
-      title:'Taxonomy',
-      path:'taxonomy/vocabularies',
-      options:{
         attributes:{
-          'data-icon':'grid'
+          'data-icon':'star'
         }
       }
     },
@@ -245,6 +180,15 @@ drupalgap.settings.menus['main_menu'] = {
       options:{
         attributes:{
           'data-icon':'info'
+        }
+      }
+    },
+    {
+      title:'Gallery',
+      path:'gallery',
+      options:{
+        attributes:{
+          'data-icon':'camera'
         }
       }
     }
@@ -257,7 +201,7 @@ drupalgap.settings.menus['main_menu'] = {
 drupalgap.settings.blocks = {}; // Do not remove this line.
 
 // Easy Street 3 Theme Blocks
-drupalgap.settings.blocks.easystreet3 = {
+drupalgap.settings.blocks.drupalday = {
   header: {
     user_menu_anonymous: {
       roles: {
