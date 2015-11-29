@@ -292,6 +292,13 @@ module.exports = [
             "navigator.notification",
             "navigator"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-battery-status/www/battery.js",
+        "id": "cordova-plugin-battery-status.battery",
+        "clobbers": [
+            "navigator.battery"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -307,7 +314,8 @@ module.exports.metadata =
     "org.apache.cordova.camera": "0.3.6",
     "org.apache.cordova.geolocation": "0.3.12",
     "cordova-plugin-contacts": "1.1.0",
-    "cordova-plugin-vibration": "2.0.0"
+    "cordova-plugin-vibration": "2.0.0",
+    "cordova-plugin-battery-status": "1.1.1"
 }
 // BOTTOM OF METADATA
 });

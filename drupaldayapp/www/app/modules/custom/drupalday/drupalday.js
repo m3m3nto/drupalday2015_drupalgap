@@ -142,6 +142,7 @@ function drupalday_dashboard_page() {
 function drupalday_pluginexamples_page() {
   try {
     
+    // Position plugin
     navigator.geolocation.getCurrentPosition(
       function(position) {
         // Place the coordinate values into the text fields, then force a change
@@ -157,26 +158,27 @@ function drupalday_pluginexamples_page() {
       }
     );
 
-    /*
-
+    // Contacts plugin
     function onContSuccess(contacts) {
       $('#numcontacts').html(contacts.length);
     };
-
     function onContError(contactError) {
       alert('onError!');
     };
-
-    // find all contacts
     var options      = new ContactFindOptions();
     options.filter   = "";
     options.multiple = true;
     options.desiredFields = [navigator.contacts.fieldType.id];
     options.hasPhoneNumber = true;
-    var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+    var fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
     navigator.contacts.find(fields, onContSuccess, onContError, options);
 
-    */
+    // Battery plugin
+    window.addEventListener("batterystatus", onBatteryStatus, false);
+
+    function onBatteryStatus(info) {
+      $('#battery').html(info.level + "% - in carica: " + info.isPlugged);
+    }
 
     var content = {};
     content.welcome_cordovaeamples = {
@@ -186,14 +188,15 @@ function drupalday_pluginexamples_page() {
         t('<p>Device platform [device]: <span id="dev"> ' + device.platform + ' ' + device.version + '</span></p>') + 
         t('<p>Device model [device]: <span id="dev">' + device.model + '</span></p>') + 
         t('<p>Connection type [connection]: <span id="conn">' + checkConnection() + '</span></p>') +
-        t('<p>Contatti in rubrica: <span id="numcontacts"></span></p>')
+        t('<p>Contatti in rubrica: <span id="numcontacts"></span></p>') + 
+        t('<p>Status batteria: <span id="battery"></span></p>')
     };
 
     content.play = {
       theme: 'button_link',
       text: t('Start vibration'),
       attributes: {
-        onclick: "navigator.vibrate(3000);"
+        onclick: "navigator.vibrate(2000);"
       }
     };
     

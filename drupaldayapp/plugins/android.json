@@ -43,6 +43,10 @@
                         {
                             "xml": "<feature name=\"Vibration\"><param name=\"android-package\" value=\"org.apache.cordova.vibration.Vibration\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Battery\"><param name=\"android-package\" value=\"org.apache.cordova.batterystatus.BatteryListener\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -121,6 +125,9 @@
             "PACKAGE_NAME": "com.drupalday"
         },
         "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.drupalday"
+        },
+        "cordova-plugin-battery-status": {
             "PACKAGE_NAME": "com.drupalday"
         }
     },
