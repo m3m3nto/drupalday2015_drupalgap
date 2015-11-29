@@ -157,6 +157,23 @@ function drupalday_pluginexamples_page() {
       }
     );
 
+    function onContSuccess(contacts) {
+      $('#numcontacts').html(contacts.length);
+    };
+
+    function onContError(contactError) {
+      alert('onError!');
+    };
+
+    // find all contacts with 'Bob' in any name field
+    var options      = new ContactFindOptions();
+    options.filter   = "";
+    options.multiple = true;
+    options.desiredFields = [navigator.contacts.fieldType.id];
+    options.hasPhoneNumber = true;
+    var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+    navigator.contacts.find(fields, onContSuccess, onContError, options);
+
     var content = {};
     content.welcome_cordovaeamples = {
       markup: '<h2 style="text-align: center;">' +
@@ -164,7 +181,16 @@ function drupalday_pluginexamples_page() {
         t('<p>Posizione [geolocation]: <span id="lat"></span> - <span id="lon"></span></p>') +
         t('<p>Device platform [device]: <span id="dev"> ' + device.platform + ' ' + device.version + '</span></p>') + 
         t('<p>Device model [device]: <span id="dev">' + device.model + '</span></p>') + 
-        t('<p>Connection type [connection]: <span id="conn">' + checkConnection() + '</span></p>') 
+        t('<p>Connection type [connection]: <span id="conn">' + checkConnection() + '</span></p>') +
+        t('<p>Contatti: <span id="numcontacts"></span></p>')
+    };
+
+    content.picker = {
+      theme: 'button_link',
+      text: t('Contact picker'),
+      attributes: {
+        onclick: "navigator.contacts.pickContact;"
+      }
     };
     
     return content;
