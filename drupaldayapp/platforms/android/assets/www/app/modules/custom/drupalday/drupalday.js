@@ -12,11 +12,11 @@ function drupalday_menu() {
       page_callback: 'drupalday_dashboard_page'
     };
     items['pluginexamples'] = {
-      title: 'Drupalday 2015 Plugin examples',
+      title: 'Plugin',
       page_callback: 'drupalday_pluginexamples_page'
     };
     items['gallery'] = {
-    title: 'DrupalDay 2015 Gallery',
+    title: 'Gallery',
     page_callback: 'drupalday_gallery_page'
   };
   return items;
@@ -28,63 +28,6 @@ function drupalday_menu() {
     return items;
   }
   catch (error) { console.log('drupalday_menu - ' + error); }
-}
-
-/**
- * The page callback for the reload page.
- * @return {String}
- */
-function drupalday_reload_page() {
-  try {
-    // Set aside any messages, then return an empty page.
-    var messages = drupalgap_get_messages();
-    if (!empty(messages)) {
-      _system_reload_messages = messages.slice();
-      _drupalday_reload_messages([]);
-    }
-    return '';
-  }
-  catch (error) { console.log('drypalday_reload_page - ' + error); }
-}
-
-/**
- * The pageshow callback for the reload page.
- */
-function drupalday_reload_pageshow() {
-  try {
-    // Set any messages that were set aside.
-    if (_drupalday_reload_messages && !empty(_drupalday_reload_messages)) {
-      for (var i = 0; i < _drupalday_reload_messages.length; i++) {
-        drupalgap_set_message(
-          _drupalday_reload_messages[i].message,
-          _drupalday_reload_messages[i].type
-        );
-      }
-      _drupalday_reload_messages = null;
-    }
-    drupalgap_loading_message_show();
-  }
-  catch (error) { console.log('drupalday_reload_pageshow - ' + error); }
-}
-
-/**
- * Implements hook_system_drupalgap_goto_post_process().
- * @param {String} path
- */
-function drupalday_drupalgap_goto_post_process(path) {
-  try {
-    if (path == '_reload') {
-      if (!_drupalday_reload_page) { return; }
-      var path = '' + _drupalday_reload_page;
-      _drupalday_reload_page = null;
-      drupalgap_loading_message_show();
-      drupalgap_goto(path, { reloadPage: true });
-    }
-
-  }
-  catch (error) {
-    console.log('drupalday_drupalgap_goto_post_process - ' + error);
-  }
 }
 
 /**
@@ -189,17 +132,31 @@ function drupalday_pluginexamples_page() {
     var orient_options = { frequency: 3000 };
     navigator.compass.watchHeading(onOrientSuccess, onOrientError, orient_options);
 
+    // Acceleration
+    function onAccSuccess(acceleration) {
+      $('#accelerationx').html(acceleration.x.toFixed(2));
+      $('#accelerationy').html(acceleration.y.toFixed(2));
+      $('#accelerationz').html(acceleration.z.toFixed(2));
+    }
+    function onAccError() {
+      alert('onError!');
+    }
+    var acc_options = { frequency: 100 };
+    navigator.accelerometer.watchAcceleration(onAccSuccess, onAccError, acc_options);
+
     var content = {};
     content.welcome_cordovaeamples = {
-      markup: '<h2 style="text-align: center;">' +
-        t('Esempi plugin Cordova') + '</h2>' + 
-        t('<p>Posizione [geolocation]: <span id="lat"></span> - <span id="lon"></span></p>') +
-        t('<p>Device platform [device]: <span id="dev"> ' + device.platform + ' ' + device.version + '</span></p>') + 
-        t('<p>Device model [device]: <span id="dev">' + device.model + '</span></p>') + 
-        t('<p>Connection type [connection]: <span id="conn">' + checkConnection() + '</span></p>') +
-        t('<p>Contatti in rubrica: <span id="numcontacts"></span></p>') + 
-        t('<p>Status batteria: <span id="battery"></span></p>') +
-        t('<p>Orientamento: <span id="orientation"></span></p>')
+      markup: '<h2>' + t('Esempi plugin Cordova') + '</h2>' + 
+        t('<p>Posizione: <span id="lat"></span> - <span id="lon"></span></p>') +
+        t('<p>Device platform: <span id="dev"> ' + device.platform + ' ' + device.version + '</span></p>') + 
+        t('<p>Device model: <span id="dev">' + device.model + '</span></p>') + 
+        t('<p>Connection type: <span id="conn">' + checkConnection() + '</span></p>') +
+        t('<p>Contacts: <span id="numcontacts"></span></p>') + 
+        t('<p>Battery: <span id="battery"></span></p>') +
+        t('<p>Orientation: <span id="orientation"></span></p>') +
+        t('<p>Acceleration: X: <span id="accelerationx"></span> ') + 
+        t('Y: <span id="accelerationy"></span> ') +
+        t('Z: <span id="accelerationz"></span><br/><br/>')
     };
 
     content.play = {
@@ -241,8 +198,8 @@ function drupalday_gallery_page() {
  */
 function drupalday_gallery_list_row(view, row) {
   try {
-      var image_html = theme('image', { path: row.field_foto.src });
-      return l(image_html, 'node/' + row.nid);
+    var image_html = theme('image', { path: row.field_foto.src });
+    return l(image_html, 'node/' + row.nid);
   }
   catch (error) { console.log('drupalday_gallery_list_row - ' + error); }
 }
@@ -262,7 +219,6 @@ function drupalday_gallery_list_empty(view) {
  */
 function checkConnection() {
     var networkState = navigator.connection.type;
-
     var states = {};
     states[Connection.UNKNOWN]  = 'Unknown';
     states[Connection.ETHERNET] = 'Ethernet';
@@ -272,6 +228,5 @@ function checkConnection() {
     states[Connection.CELL_4G]  = 'Cell 4G';
     states[Connection.CELL]     = 'Cell generic';
     states[Connection.NONE]     = 'No network';
-
     return states[networkState];
 }

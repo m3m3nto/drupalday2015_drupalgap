@@ -45,8 +45,8 @@ Drupal.settings.cache.views.expiration = 3600;
 // DrupalGap Mode (defaults to 'web-app')
 //  'web-app' - use this mode to build a web application for a browser window
 //  'phonegap' - use this mode to build a mobile application with phonegap
-drupalgap.settings.mode = 'web-app';
-//drupalgap.settings.mode = 'phonegap';
+//drupalgap.settings.mode = 'web-app';
+drupalgap.settings.mode = 'phonegap';
 
 // Language Files - locale/[language-code].json
 drupalgap.settings.locale = {
@@ -200,7 +200,7 @@ drupalgap.settings.menus['main_menu'] = {
  ****************************************/
 drupalgap.settings.blocks = {}; // Do not remove this line.
 
-// Easy Street 3 Theme Blocks
+// DrupalDay Theme Blocks
 drupalgap.settings.blocks.drupalday = {
   header: {
     user_menu_anonymous: {
@@ -228,7 +228,10 @@ drupalgap.settings.blocks.drupalday = {
     main: { }
   },
   footer: {
-    powered_by: { }
+    powered_by: { 
+      value: ['anonymous user', 'authenticated user'],
+      mode: 'exclude'
+    }
   }
 };
 
