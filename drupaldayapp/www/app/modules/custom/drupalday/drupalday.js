@@ -157,6 +157,8 @@ function drupalday_pluginexamples_page() {
       }
     );
 
+    /*
+
     function onContSuccess(contacts) {
       $('#numcontacts').html(contacts.length);
     };
@@ -165,7 +167,7 @@ function drupalday_pluginexamples_page() {
       alert('onError!');
     };
 
-    // find all contacts with 'Bob' in any name field
+    // find all contacts
     var options      = new ContactFindOptions();
     options.filter   = "";
     options.multiple = true;
@@ -173,6 +175,8 @@ function drupalday_pluginexamples_page() {
     options.hasPhoneNumber = true;
     var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
     navigator.contacts.find(fields, onContSuccess, onContError, options);
+
+    */
 
     var content = {};
     content.welcome_cordovaeamples = {
@@ -185,19 +189,11 @@ function drupalday_pluginexamples_page() {
         t('<p>Contatti in rubrica: <span id="numcontacts"></span></p>')
     };
 
-    content.picker = {
+    content.play = {
       theme: 'button_link',
-      text: t('Suona Chemical Brothers'),
+      text: t('Start vibration'),
       attributes: {
-        onclick: "navigator.contacts.pickContact;"
-      }
-    };
-
-    content.picker = {
-      theme: 'button_link',
-      text: t('Stop Chemical Brothers'),
-      attributes: {
-        onclick: "navigator.contacts.pickContact;"
+        onclick: "navigator.vibrate(3000);"
       }
     };
     

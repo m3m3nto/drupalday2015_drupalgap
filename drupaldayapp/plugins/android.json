@@ -39,6 +39,10 @@
                         {
                             "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Vibration\"><param name=\"android-package\" value=\"org.apache.cordova.vibration.Vibration\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -72,6 +76,12 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
                             "count": 1
                         }
                     ]
@@ -108,6 +118,9 @@
             "PACKAGE_NAME": "com.drupalday"
         },
         "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.drupalday"
+        },
+        "cordova-plugin-vibration": {
             "PACKAGE_NAME": "com.drupalday"
         }
     },

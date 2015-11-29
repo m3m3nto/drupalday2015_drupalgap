@@ -284,6 +284,14 @@ module.exports = [
         "merges": [
             ""
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-vibration/www/vibration.js",
+        "id": "cordova-plugin-vibration.notification",
+        "merges": [
+            "navigator.notification",
+            "navigator"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -298,7 +306,8 @@ module.exports.metadata =
     "org.apache.cordova.network-information": "0.2.15",
     "org.apache.cordova.camera": "0.3.6",
     "org.apache.cordova.geolocation": "0.3.12",
-    "cordova-plugin-contacts": "1.1.0"
+    "cordova-plugin-contacts": "1.1.0",
+    "cordova-plugin-vibration": "2.0.0"
 }
 // BOTTOM OF METADATA
 });
