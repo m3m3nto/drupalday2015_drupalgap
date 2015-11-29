@@ -299,6 +299,27 @@ module.exports = [
         "clobbers": [
             "navigator.battery"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-device-orientation/www/CompassError.js",
+        "id": "cordova-plugin-device-orientation.CompassError",
+        "clobbers": [
+            "CompassError"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-device-orientation/www/CompassHeading.js",
+        "id": "cordova-plugin-device-orientation.CompassHeading",
+        "clobbers": [
+            "CompassHeading"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-device-orientation/www/compass.js",
+        "id": "cordova-plugin-device-orientation.compass",
+        "clobbers": [
+            "navigator.compass"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -315,7 +336,8 @@ module.exports.metadata =
     "org.apache.cordova.geolocation": "0.3.12",
     "cordova-plugin-contacts": "1.1.0",
     "cordova-plugin-vibration": "2.0.0",
-    "cordova-plugin-battery-status": "1.1.1"
+    "cordova-plugin-battery-status": "1.1.1",
+    "cordova-plugin-device-orientation": "1.0.2"
 }
 // BOTTOM OF METADATA
 });

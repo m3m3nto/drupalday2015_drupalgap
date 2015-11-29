@@ -33,6 +33,9 @@
     <feature name="Battery">
         <param name="android-package" value="org.apache.cordova.batterystatus.BatteryListener" />
     </feature>
+    <feature name="Compass">
+        <param name="android-package" value="org.apache.cordova.deviceorientation.CompassListener" />
+    </feature>
     <allow-intent href="market:*" />
     <name>DrupalDay App</name>
     <description>

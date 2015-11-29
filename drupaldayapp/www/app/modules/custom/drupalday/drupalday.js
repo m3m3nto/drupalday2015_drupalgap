@@ -163,7 +163,7 @@ function drupalday_pluginexamples_page() {
       $('#numcontacts').html(contacts.length);
     };
     function onContError(contactError) {
-      alert('onError!');
+      alert('Error retrieving contacts!');
     };
     var options      = new ContactFindOptions();
     options.filter   = "";
@@ -175,10 +175,19 @@ function drupalday_pluginexamples_page() {
 
     // Battery plugin
     window.addEventListener("batterystatus", onBatteryStatus, false);
-
     function onBatteryStatus(info) {
       $('#battery').html(info.level + "% - in carica: " + info.isPlugged);
     }
+
+    // Orientation
+    function onOrientSuccess(heading) {
+      $('#orientation').html(heading.magneticHeading);
+    };
+    function onOrientError(error) {
+      alert('CompassError: ' + error.code);
+    };
+    var orient_options = { frequency: 3000 };
+    navigator.compass.watchHeading(onOrientSuccess, onOrientError, orient_options);
 
     var content = {};
     content.welcome_cordovaeamples = {
@@ -189,7 +198,8 @@ function drupalday_pluginexamples_page() {
         t('<p>Device model [device]: <span id="dev">' + device.model + '</span></p>') + 
         t('<p>Connection type [connection]: <span id="conn">' + checkConnection() + '</span></p>') +
         t('<p>Contatti in rubrica: <span id="numcontacts"></span></p>') + 
-        t('<p>Status batteria: <span id="battery"></span></p>')
+        t('<p>Status batteria: <span id="battery"></span></p>') +
+        t('<p>Orientamento: <span id="orientation"></span></p>')
     };
 
     content.play = {
