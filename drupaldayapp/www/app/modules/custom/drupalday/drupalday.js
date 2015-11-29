@@ -11,6 +11,10 @@ function drupalday_menu() {
       title: 'Drupalday 2015',
       page_callback: 'drupalday_dashboard_page'
     };
+    items['pluginexamples'] = {
+      title: 'Drupalday 2015 Plugin examples',
+      page_callback: 'drupalday_pluginexamples_page'
+    };
     items['gallery'] = {
     title: 'DrupalDay 2015 Gallery',
     page_callback: 'drupalday_gallery_page'
@@ -121,9 +125,51 @@ function drupalday_dashboard_page() {
       text: t('Nuova Foto'),
       path: 'node/add/foto'
     };
+    content.cordovaplugins = {
+      theme: 'button_link',
+      text: t('Cordova plugins'),
+      path: 'pluginexamples'
+    };
     return content;
   }
   catch (error) { console.log('drupalday_dashboard_page - ' + error); }
+}
+
+/**
+ * Page callback for the plugin examples page.
+ * @return {Object}
+ */
+function drupalday_pluginexamples_page() {
+  try {
+    
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        // Place the coordinate values into the text fields, then force a change
+        // event to fire.
+        $('#lat').html(position.coords.latitude);
+        $('#lon').html(position.coords.longitude);
+      },
+      function(error) {
+        console.log('drupalday_pluginexamples_page - getCurrentPosition - ' + error);
+      },
+      {
+        enableHighAccuracy: true
+      }
+    );
+
+    $('#dev').html(device.model);
+
+    var content = {};
+    content.welcome_cordovaeamples = {
+      markup: '<h2 style="text-align: center;">' +
+        t('Esempi plugin Cordova') + '</h2>' + 
+        t('Posizione attuale: lat: <span id="lat"></span> :: long: <span id="lon"></span>') +
+        t('Device: <span id="dev"></span>') 
+    };
+    
+    return content;
+  }
+  catch (error) { console.log('drupalday_pluginexamples_page - ' + error); }
 }
 
 /**
@@ -157,7 +203,6 @@ function drupalday_gallery_list_row(view, row) {
   }
   catch (error) { console.log('drupalday_gallery_list_row - ' + error); }
 }
- 
  
 /**
  * Callback function for no results.
