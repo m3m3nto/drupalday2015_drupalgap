@@ -146,8 +146,8 @@ function drupalday_pluginexamples_page() {
       function(position) {
         // Place the coordinate values into the text fields, then force a change
         // event to fire.
-        $('#lat').html(position.coords.latitude);
-        $('#lon').html(position.coords.longitude);
+        $('#lat').html(position.coords.latitude.toFixed(2));
+        $('#lon').html(position.coords.longitude.toFixed(2));
       },
       function(error) {
         console.log('drupalday_pluginexamples_page - getCurrentPosition - ' + error);
@@ -157,14 +157,14 @@ function drupalday_pluginexamples_page() {
       }
     );
 
-    $('#dev').html(device.model);
-
     var content = {};
     content.welcome_cordovaeamples = {
       markup: '<h2 style="text-align: center;">' +
         t('Esempi plugin Cordova') + '</h2>' + 
-        t('Posizione attuale: lat: <span id="lat"></span> :: long: <span id="lon"></span>') +
-        t('Device: <span id="dev"></span>') 
+        t('<p>Posizione [geolocation]: <span id="lat"></span> - <span id="lon"></span></p>') +
+        t('<p>Device platform [device]: <span id="dev"> ' + device.platform + ' ' + device.version + '</span></p>') + 
+        t('<p>Device model [device]: <span id="dev">' + device.model + '</span></p>') + 
+        t('<p>Connection type [connection]: <span id="conn">' + checkConnection() + '</span></p>') 
     };
     
     return content;
@@ -212,4 +212,23 @@ function drupalday_gallery_list_empty(view) {
     return '<p>Spiacenti nessuna foto trovata</p>';
   }
   catch (error) { console.log('drupalday_gallery_list_empty - ' + error); }
+}
+
+/**
+ * @see https://github.com/apache/cordova-plugin-network-information
+ */
+function checkConnection() {
+    var networkState = navigator.connection.type;
+
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown';
+    states[Connection.ETHERNET] = 'Ethernet';
+    states[Connection.WIFI]     = 'WiFi';
+    states[Connection.CELL_2G]  = 'Cell 2G';
+    states[Connection.CELL_3G]  = 'Cell 3G';
+    states[Connection.CELL_4G]  = 'Cell 4G';
+    states[Connection.CELL]     = 'Cell generic';
+    states[Connection.NONE]     = 'No network';
+
+    return states[networkState];
 }
