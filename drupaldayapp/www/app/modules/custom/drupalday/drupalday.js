@@ -88,8 +88,6 @@ function drupalday_pluginexamples_page() {
     // Position plugin
     navigator.geolocation.getCurrentPosition(
       function(position) {
-        // Place the coordinate values into the text fields, then force a change
-        // event to fire.
         $('#lat').html(position.coords.latitude.toFixed(2));
         $('#lon').html(position.coords.longitude.toFixed(2));
       },
