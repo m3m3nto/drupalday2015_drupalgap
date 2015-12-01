@@ -13,18 +13,19 @@ function drupalday_menu() {
     };
     items['pluginexamples'] = {
       title: 'Plugin',
-      page_callback: 'drupalday_pluginexamples_page'
+      page_callback: 'drupalday_pluginexamples_page',
+      options:{
+        reloadPage:true
+      }
     };
     items['gallery'] = {
-    title: 'Gallery',
-    page_callback: 'drupalday_gallery_page'
-  };
-  return items;
-    items['_reload'] = {
-      title: t('Reloading') + '...',
-      page_callback: 'drupalday_reload_page',
-      pageshow: 'drupalday_reload_pageshow'
+      title: 'Gallery',
+      page_callback: 'drupalday_gallery_page',
+      options:{
+        reloadPage:true
+      }
     };
+  
     return items;
   }
   catch (error) { console.log('drupalday_menu - ' + error); }
