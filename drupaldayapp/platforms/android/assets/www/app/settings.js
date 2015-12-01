@@ -15,7 +15,7 @@ Drupal.settings.debug = true;
 /* Drupal Paths */
  
 // Site Path (do not use a trailing slash)
-Drupal.settings.site_path = 'http://drupalday.dev'; // e.g. http://www.example.com
+Drupal.settings.site_path = 'http://drupalday.iotdb.it'; // e.g. http://www.example.com
 
 // Default Services Endpoint Path
 Drupal.settings.endpoint = 'drupalgap';

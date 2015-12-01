@@ -60,7 +60,7 @@ function drupalday_dashboard_page() {
     };
     content.gallery = {
       theme: 'button_link',
-      text: t('Drupal Day Gallery'),
+      text: t('Gallery'),
       path: 'gallery'
     };
     content.foto = {
