@@ -25,7 +25,6 @@ function drupalday_menu() {
         reloadPage:true
       }
     };
-  
     return items;
   }
   catch (error) { console.log('drupalday_menu - ' + error); }
